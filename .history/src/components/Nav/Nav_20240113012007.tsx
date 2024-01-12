@@ -4,7 +4,7 @@ import { FaPencilAlt } from 'react-icons/fa'
 
 const Nav = () => {
   return (
-    <section className="flex justify-between p-15 h-50 border-solid border-b border-gray-700">
+    <section className="flex justify-between p-15 h-50 border-solid border-b">
       <div className="flex items-center">
         <CiShop className="text-25" />
         <span className="ml-10 text-20">Shoppy</span>

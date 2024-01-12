@@ -3,7 +3,7 @@ import Nav from './components/Nav/Nav'
 
 const App = () => {
   return (
-    <section className="flex flex-col justify-center w-1024 m-auto">
+    <section className="flex flex-col justify-center w-3/4 bg-black h-30 text-lg">
       <Nav />
       <Outlet />
     </section>
