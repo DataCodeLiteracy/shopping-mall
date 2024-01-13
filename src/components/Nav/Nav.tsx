@@ -1,7 +1,5 @@
-import { useEffect } from 'react'
 import { CiShop } from 'react-icons/ci'
-import { FaCartArrowDown } from 'react-icons/fa'
-import { FaPencilAlt } from 'react-icons/fa'
+import { FaCartArrowDown, FaPencilAlt } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 
 const Nav = ({ setPath }: any) => {
@@ -12,11 +10,21 @@ const Nav = ({ setPath }: any) => {
     navigate('/login')
   }
 
+  const goToTheMainPage = () => {
+    setPath('/')
+    navigate('/')
+  }
+
   return (
     <nav className="flex justify-between p-15 h-50 border-solid border-b border-gray-700">
       <div className="flex items-center">
         <CiShop className="text-25" />
-        <span className="ml-10 text-20">Shoppy</span>
+        <span
+          className="ml-10 text-20 cursor-pointer"
+          onClick={goToTheMainPage}
+        >
+          Shoppy
+        </span>
       </div>
       <div className="flex items-center justify-evenly w-1/5 ">
         <FaCartArrowDown className="text-20" />
