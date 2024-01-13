@@ -6596,7 +6596,7 @@ const RAW_RUNTIME_STATE =
         "packageDependencies": [\
           ["browserslist", "npm:4.22.2"],\
           ["caniuse-lite", "npm:1.0.30001576"],\
-          ["electron-to-chromium", "npm:1.4.629"],\
+          ["electron-to-chromium", "npm:1.4.630"],\
           ["node-releases", "npm:2.0.14"],\
           ["update-browserslist-db", "virtual:87e70d802146e5a0e8f2a12b5ab64004040c6640441dba54229a7db766cb1b88edabd3d3c814ce33d6ba839c4e517b12e9b0a7febfca22ac2a64177042bf3ee6#npm:1.0.13"]\
         ],\
@@ -8138,10 +8138,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["electron-to-chromium", [\
-      ["npm:1.4.629", {\
-        "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.4.629-b3d2460fb3-198c6ab68f.zip/node_modules/electron-to-chromium/",\
+      ["npm:1.4.630", {\
+        "packageLocation": "./.yarn/cache/electron-to-chromium-npm-1.4.630-cfd6250493-b5565f062f.zip/node_modules/electron-to-chromium/",\
         "packageDependencies": [\
-          ["electron-to-chromium", "npm:1.4.629"]\
+          ["electron-to-chromium", "npm:1.4.630"]\
         ],\
         "linkType": "HARD"\
       }]\

@@ -1,7 +1,7 @@
-'use client'
-
-import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useRecoilValue, useSetRecoilState } from 'recoil'
+import { urlState } from '../../recoil/url/atom'
+import changePath from '../../utils/changePath'
 
 type ButtonProps = {
   type?: 'submit' | 'reset' | 'button' | undefined
@@ -15,18 +15,17 @@ const AuthButton = ({
   text
 }: ButtonProps) => {
   const navigate = useNavigate()
-  const [pathName, setPathName] = useState('')
-
-  useEffect(() => {
-    setPathName(window.location.pathname)
-  }, [pathName])
+  const setUrlPath = useSetRecoilState(urlState)
+  const path = useRecoilValue(urlState)
 
   const goToThePage = () => {
-    if (navigate) {
-      if (pathName === '/register') {
-        navigate('/login')
+    if (path === '/register') {
+      changePath({ setUrlPath, navigate, path: '/login', replace: true })
+    } else {
+      if (text === '로그인') {
+        changePath({ setUrlPath, navigate, path: '/', replace: true })
       } else {
-        text === '로그인' ? navigate('/') : navigate('/register')
+        changePath({ setUrlPath, navigate, path: '/register', replace: true })
       }
     }
   }
