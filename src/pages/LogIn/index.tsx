@@ -2,7 +2,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import AuthButton from '../../components/AuthButton/AuthButton'
 import AuthInput from '../../components/AuthInput/AuthInput'
-import useChangePath from '../../utils/useChangePath'
+import useChangePath from '../../hooks/useChangePath'
 
 const LogIn = () => {
   const { changePath: changeRegisterPath } = useChangePath({

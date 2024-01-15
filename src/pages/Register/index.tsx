@@ -6,7 +6,7 @@ import {
 import { ChangeEvent, FormEvent, useState } from 'react'
 import AuthButton from '../../components/AuthButton/AuthButton'
 import AuthInput from '../../components/AuthInput/AuthInput'
-import useChangePath from '../../utils/useChangePath'
+import useChangePath from '../../hooks/useChangePath'
 
 const Register = () => {
   const [userInfo, setUserInfo] = useState({
@@ -37,7 +37,8 @@ const Register = () => {
       )
       if (auth.currentUser) {
         await updateProfile(auth.currentUser, {
-          displayName: userInfo.name
+          displayName: userInfo.name,
+          photoURL: '/images/user.png'
         })
       }
       changeLoginPath()

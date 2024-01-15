@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import useChangePath from '../../utils/useChangePath'
+import useChangePath from '../../hooks/useChangePath'
 
 const Cart = () => {
   const { changePath: checkCartPath } = useChangePath({

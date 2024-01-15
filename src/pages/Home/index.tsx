@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import useChangePath from '../../utils/useChangePath'
+import useChangePath from '../../hooks/useChangePath'
 
 const Home = () => {
   const { changePath: checkRootPath } = useChangePath({
