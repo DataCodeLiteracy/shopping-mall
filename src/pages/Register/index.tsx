@@ -4,15 +4,15 @@ import {
   updateProfile
 } from 'firebase/auth'
 import { ChangeEvent, FormEvent, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import AuthButton from '../../components/AuthButton/AuthButton'
 import AuthInput from '../../components/AuthInput/AuthInput'
 import ValidationMessage from '../../components/ValidationMessage/ValidationMessage'
 import ValidationMessages from '../../components/ValidationMessage/ValidationMessages'
-import useChangePath from '../../hooks/useChangePath'
 import isEmailCheck from '../../utils/isEmailCheck'
+import isNameCheck from '../../utils/isNameCheck'
 import isPasswordCheckValid from '../../utils/isPasswordCheckValid'
 import isPasswordValid from '../../utils/isPasswordValid'
-import isNameCheck from '../../utils/isNameCheck'
 import isPhoneCheck from '../../utils/isPhoneCheck'
 
 const Register = () => {
@@ -34,9 +34,7 @@ const Register = () => {
   const [isPasswordTouched, setIsPasswordTouched] = useState(false)
   const [isPasswordCheckTouched, setIsPasswordCheckTouched] = useState(false)
 
-  const { changePath: changeLoginPath } = useChangePath({
-    path: '/login'
-  })
+  const navigate = useNavigate()
 
   const handleEmailChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
@@ -152,7 +150,7 @@ const Register = () => {
           photoURL: '/images/user.png'
         })
       }
-      changeLoginPath()
+      navigate('/login')
     } catch (error) {}
   }
 
@@ -232,7 +230,7 @@ const Register = () => {
           type="button"
           text="로그인하러 가기"
           className="w-full p-10 my-4 border border-solid border-gray-400 rounded-sm bg-white"
-          onClick={changeLoginPath}
+          onClick={() => navigate('/login')}
         />
         <AuthButton text="동의하고 가입하기" />
       </form>

@@ -2,18 +2,13 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import AuthButton from '../../components/AuthButton/AuthButton'
 import AuthInput from '../../components/AuthInput/AuthInput'
-import useChangePath from '../../hooks/useChangePath'
+import { useNavigate } from 'react-router-dom'
 
 const LogIn = () => {
-  const { changePath: changeRegisterPath } = useChangePath({
-    path: '/register'
-  })
-  const { changePath: changeRootPath } = useChangePath({
-    path: '/'
-  })
-
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
+
+  const navigate = useNavigate()
 
   const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value)
@@ -39,7 +34,7 @@ const LogIn = () => {
 
       localStorage.setItem('access_token', accessToken)
 
-      changeRootPath()
+      navigate('/')
     } catch (error) {}
   }
 
@@ -62,7 +57,7 @@ const LogIn = () => {
           type="button"
           className="w-full p-10 mt-4 border border-solid border-gray-400 rounded-sm bg-white"
           text="회원가입"
-          onClick={changeRegisterPath}
+          onClick={() => navigate('/register')}
         />
       </form>
     </section>
