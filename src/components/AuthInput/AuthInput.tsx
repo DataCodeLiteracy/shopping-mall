@@ -4,6 +4,8 @@ type AuthInputType = {
   name?: string
   value?: string
   onChange?: React.ChangeEventHandler<HTMLInputElement>
+  onBlur?: React.FocusEventHandler<HTMLInputElement>
+  onClick?: React.MouseEventHandler<HTMLInputElement>
 }
 
 const AuthInput = ({
@@ -11,7 +13,9 @@ const AuthInput = ({
   placeholder,
   name,
   value,
-  onChange
+  onChange,
+  onBlur,
+  onClick
 }: AuthInputType) => {
   return (
     <div className="h-40 mb-10 border-2 border-solid border-gray-200 rounded-sm">
@@ -22,6 +26,8 @@ const AuthInput = ({
         name={name}
         value={value}
         onChange={onChange}
+        onBlur={onBlur}
+        onClick={onClick}
       />
     </div>
   )
