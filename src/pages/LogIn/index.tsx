@@ -27,17 +27,21 @@ const LogIn = () => {
     e.preventDefault()
 
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        emailInput.value,
-        passwordInput.value
-      )
-      const user = userCredential.user
-      const accessToken = await user.getIdToken()
+      if (!emailInput.isValid && !passwordInput.isValid) {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          emailInput.value,
+          passwordInput.value
+        )
+        const user = userCredential.user
+        const accessToken = await user.getIdToken()
 
-      localStorage.setItem('access_token', accessToken)
+        localStorage.setItem('access_token', accessToken)
 
-      navigate('/')
+        navigate('/')
+      } else {
+        alert('모든 정보를 올바르게 입력해주세요.')
+      }
     } catch (error) {}
   }
 

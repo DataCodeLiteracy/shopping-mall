@@ -54,18 +54,28 @@ const Register = () => {
   const handleSubmitRegister = async (e: FormEvent) => {
     e.preventDefault()
     try {
-      await createUserWithEmailAndPassword(
-        auth,
-        emailInput.value,
-        passwordInput.value
-      )
-      if (auth.currentUser) {
-        await updateProfile(auth.currentUser, {
-          displayName: nameInput.value,
-          photoURL: '/images/user.png'
-        })
+      if (
+        !emailInput.isValid &&
+        !passwordInput.isValid &&
+        !passwordCheckInput.isValid &&
+        !nameInput.isValid &&
+        !phoneInput.isValid
+      ) {
+        await createUserWithEmailAndPassword(
+          auth,
+          emailInput.value,
+          passwordInput.value
+        )
+        if (auth.currentUser) {
+          await updateProfile(auth.currentUser, {
+            displayName: nameInput.value,
+            photoURL: '/images/user.png'
+          })
+        }
+        navigate('/login')
+      } else {
+        alert('모든 정보를 올바르게 입력해주세요.')
       }
-      navigate('/login')
     } catch (error) {}
   }
 
