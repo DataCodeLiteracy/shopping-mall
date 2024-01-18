@@ -6,7 +6,10 @@ type AuthInputType = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>
   onBlur?: React.FocusEventHandler<HTMLInputElement>
   onClick?: React.MouseEventHandler<HTMLInputElement>
+  className?: string
 }
+
+export const DEFAULT_INPUT_STYLE = 'w-full h-full pl-10 text-sm outline-none'
 
 const AuthInput = ({
   type,
@@ -15,12 +18,13 @@ const AuthInput = ({
   value,
   onChange,
   onBlur,
-  onClick
+  onClick,
+  className
 }: AuthInputType) => {
   return (
-    <div className="h-40 mb-10 border-2 border-solid border-gray-200 rounded-sm">
+    <div className="h-40 mb-10 border-1 border-solid border-gray-200 rounded-sm">
       <input
-        className="w-full h-full pl-10 text-sm outline-none"
+        className={className}
         type={type}
         placeholder={placeholder}
         name={name}

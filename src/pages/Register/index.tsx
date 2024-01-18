@@ -6,7 +6,9 @@ import {
 import { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthButton from '../../components/AuthButton/AuthButton'
-import AuthInput from '../../components/AuthInput/AuthInput'
+import AuthInput, {
+  DEFAULT_INPUT_STYLE
+} from '../../components/AuthInput/AuthInput'
 import ValidationMessage from '../../components/ValidationMessage/ValidationMessage'
 import ValidationMessages from '../../components/ValidationMessage/ValidationMessages'
 import useInput from '../../hooks/useInput'
@@ -90,6 +92,14 @@ const Register = () => {
           value={emailInput.value}
           onChange={emailInput.handleChange}
           onBlur={emailInput.handleBlur}
+          onClick={emailInput.handleTouch}
+          className={`${
+            emailInput.isTouched && !emailInput.isValid
+              ? 'border-b-2 border-blue-500'
+              : emailInput.isValid
+              ? 'border-b-2 border-red-500'
+              : ''
+          } ${DEFAULT_INPUT_STYLE}`}
         />
         {emailInput.value === '' && emailInput.isEmpty && (
           <ValidationMessage text="이메일을 입력하세요" />
@@ -105,6 +115,13 @@ const Register = () => {
           onChange={passwordInput.handleChange}
           onClick={passwordInput.handleTouch}
           onBlur={passwordInput.handleBlur}
+          className={`${
+            passwordInput.isTouched && !passwordInput.isValid
+              ? 'border-b-2 border-blue-500'
+              : passwordInput.isValid
+              ? 'border-b-2 border-red-500'
+              : ''
+          } ${DEFAULT_INPUT_STYLE}`}
         />
         {((passwordInput.isEmpty && passwordInput.isTouched) ||
           passwordInput.isValid) && (
@@ -122,6 +139,16 @@ const Register = () => {
           onChange={passwordCheckInput.handleChange}
           onBlur={passwordCheckInput.handleBlur}
           onClick={passwordCheckInput.handleTouch}
+          className={`${
+            !passwordCheckInput.isEmpty &&
+            passwordCheckInput.isTouched &&
+            !passwordCheckInput.isValid
+              ? 'border-b-2 border-blue-500'
+              : passwordCheckInput.isValid ||
+                (passwordCheckInput.isEmpty && passwordCheckInput.isTouched)
+              ? 'border-b-2 border-red-500'
+              : ''
+          } ${DEFAULT_INPUT_STYLE}`}
         />
         {!passwordCheckInput.isEmpty && passwordCheckInput.isValid && (
           <ValidationMessage text="X 새 비밀번호가 일치하지 않습니다." />
@@ -136,6 +163,14 @@ const Register = () => {
           value={nameInput.value}
           onChange={nameInput.handleChange}
           onBlur={nameInput.handleBlur}
+          onClick={nameInput.handleTouch}
+          className={`${
+            nameInput.isTouched && !nameInput.isValid
+              ? 'border-b-2 border-blue-500'
+              : nameInput.isValid
+              ? 'border-b-2 border-red-500'
+              : ''
+          } ${DEFAULT_INPUT_STYLE}`}
         />
         {(nameInput.isEmpty || nameInput.isValid) && (
           <ValidationMessage text="이름을 정확히 입력하세요." />
@@ -147,6 +182,14 @@ const Register = () => {
           value={phoneInput.value}
           onChange={phoneInput.handleChange}
           onBlur={phoneInput.handleBlur}
+          onClick={phoneInput.handleTouch}
+          className={`${
+            phoneInput.isTouched && !phoneInput.isValid
+              ? 'border-b-2 border-blue-500'
+              : phoneInput.isValid
+              ? 'border-b-2 border-red-500'
+              : ''
+          } ${DEFAULT_INPUT_STYLE}`}
         />
         {(phoneInput.isEmpty || phoneInput.isValid) && (
           <ValidationMessage text="휴대폰 번호를 정확하게 입력하세요. ([예시] 01012345678)" />

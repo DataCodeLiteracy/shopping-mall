@@ -40,6 +40,9 @@ const useInput = ({
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target
+
+    setIsTouched(false)
+
     if (value.trim() === '') {
       setIsEmpty(true)
     }
@@ -68,6 +71,8 @@ const useInput = ({
     if (type === 'passwordCheck') {
       if (value.trim() !== '') {
         setIsEmpty(false)
+      } else {
+        setIsTouched(true)
       }
     }
   }

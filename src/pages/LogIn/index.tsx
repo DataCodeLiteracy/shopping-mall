@@ -2,7 +2,9 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthButton from '../../components/AuthButton/AuthButton'
-import AuthInput from '../../components/AuthInput/AuthInput'
+import AuthInput, {
+  DEFAULT_INPUT_STYLE
+} from '../../components/AuthInput/AuthInput'
 import ValidationMessage from '../../components/ValidationMessage/ValidationMessage'
 import useInput from '../../hooks/useInput'
 import { isEmailCheck, isPasswordValid } from '../../utils/isValidationCheck'
@@ -53,6 +55,14 @@ const LogIn = () => {
           placeholder="이메일"
           onChange={emailInput.handleChange}
           onBlur={emailInput.handleBlur}
+          onClick={emailInput.handleTouch}
+          className={`${
+            emailInput.isTouched && !emailInput.isValid
+              ? 'border-b-2 border-blue-500'
+              : emailInput.isValid
+              ? 'border-b-2 border-red-500'
+              : ''
+          } ${DEFAULT_INPUT_STYLE}`}
         />
         {emailInput.value === '' && emailInput.isEmpty && (
           <ValidationMessage text="아이디(이메일)을 입력하세요" />
@@ -65,6 +75,14 @@ const LogIn = () => {
           placeholder="비밀번호"
           onChange={passwordInput.handleChange}
           onBlur={passwordInput.handleBlur}
+          onClick={passwordInput.handleTouch}
+          className={`${
+            passwordInput.isTouched && !passwordInput.isValid
+              ? 'border-b-2 border-blue-500'
+              : passwordInput.isValid
+              ? 'border-b-2 border-red-500'
+              : ''
+          } ${DEFAULT_INPUT_STYLE}`}
         />
         {((passwordInput.isEmpty && passwordInput.isTouched) ||
           passwordInput.isValid) && (
