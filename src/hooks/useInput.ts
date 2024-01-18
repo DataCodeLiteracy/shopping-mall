@@ -18,74 +18,42 @@ const useInput = ({
   const [isEmpty, setIsEmpty] = useState(false)
   const [isTouched, setIsTouched] = useState(false)
 
+  const validateInput = (inputValue: string) => {
+    setIsEmpty(inputValue.trim() === '')
+
+    const validationCondition =
+      type === 'email' ||
+      type === 'name' ||
+      type === 'phone' ||
+      type === 'password'
+
+    setIsValid(
+      validationCondition
+        ? !validator(inputValue)
+        : !validator(inputValue, additionValue)
+    )
+  }
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target
-
     setValue(value)
-
-    if (type === 'email' || type === 'name' || type === 'phone') {
-      setIsEmpty(false)
-    }
-
-    if (type === 'passwordCheck') {
-      setIsEmpty(false)
-
-      if (validator(value, additionValue)) {
-        setIsValid(false)
-      } else {
-        setIsValid(true)
-      }
-    }
   }
 
   const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
     const { value } = e.target
-
     setIsTouched(false)
-
-    if (value.trim() === '') {
-      setIsEmpty(true)
-    }
-
-    if (type === 'email' || type === 'name' || type === 'phone') {
-      if (validator(value)) {
-        setIsValid(false)
-      } else {
-        setIsValid(true)
-      }
-    }
-
-    if (type === 'password') {
-      if (value.trim() !== '') {
-        setIsEmpty(false)
-      }
-
-      if (validator(value, additionValue)) {
-        setIsValid(false)
-        setIsEmpty(false)
-      } else {
-        setIsValid(true)
-      }
-    }
+    validateInput(value)
 
     if (type === 'passwordCheck') {
-      if (value.trim() !== '') {
-        setIsEmpty(false)
-      } else {
+      if (!isValid) setIsTouched(false)
+      else {
         setIsTouched(true)
       }
     }
   }
 
-  const handleTouch = (e: React.MouseEvent<HTMLInputElement>) => {
-    const { value } = e.currentTarget
+  const handleTouch = () => {
     setIsTouched(true)
-
-    if (type === 'passwordCheck') {
-      if (value.trim() === '') {
-        setIsTouched(true)
-      }
-    }
   }
 
   return {
