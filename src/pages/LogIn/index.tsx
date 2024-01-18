@@ -44,7 +44,14 @@ const LogIn = () => {
       } else {
         alert('모든 정보를 올바르게 입력해주세요.')
       }
-    } catch (error) {}
+    } catch (error) {
+      if (typeof error === 'object' && error !== null && 'code' in error) {
+        const errorCode = (error as { code: string }).code
+        if (errorCode === 'auth/invalid-credential') {
+          alert('이메일 또는 비밀번호를 잘못 입력하셨습니다.')
+        }
+      }
+    }
   }
 
   return (

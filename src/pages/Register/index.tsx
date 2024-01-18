@@ -61,7 +61,10 @@ const Register = () => {
         !passwordInput.isValid &&
         !passwordCheckInput.isValid &&
         !nameInput.isValid &&
-        !phoneInput.isValid
+        !phoneInput.isValid &&
+        passwordCheckInput.value.length !== 0 &&
+        nameInput.value.length !== 0 &&
+        phoneInput.value.length !== 0
       ) {
         await createUserWithEmailAndPassword(
           auth,
@@ -78,7 +81,14 @@ const Register = () => {
       } else {
         alert('모든 정보를 올바르게 입력해주세요.')
       }
-    } catch (error) {}
+    } catch (error) {
+      if (typeof error === 'object' && error !== null && 'code' in error) {
+        const errorCode = (error as { code: string }).code
+        if (errorCode === 'auth/email-already-in-use') {
+          alert('이미 존재하는 이메일입니다.')
+        }
+      }
+    }
   }
 
   return (
