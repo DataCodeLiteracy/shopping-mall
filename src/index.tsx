@@ -8,6 +8,9 @@ import Cart from './pages/Cart'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LogIn from './pages/LogIn'
 import Register from './pages/Register'
+import { RecoilRoot } from 'recoil'
+import { initializeFirebase } from './firebase'
+initializeFirebase()
 
 const router = createBrowserRouter([
   {
@@ -44,6 +47,8 @@ if (!rootElement) throw new Error('Root element not found')
 const root: ReactDOM.Root = ReactDOM.createRoot(rootElement)
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <RecoilRoot>
+      <RouterProvider router={router} />
+    </RecoilRoot>
   </React.StrictMode>
 )
