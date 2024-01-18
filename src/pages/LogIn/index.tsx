@@ -1,22 +1,25 @@
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
-import { ChangeEvent, FormEvent, useState } from 'react'
+import { FormEvent } from 'react'
+import { useNavigate } from 'react-router-dom'
 import AuthButton from '../../components/AuthButton/AuthButton'
 import AuthInput from '../../components/AuthInput/AuthInput'
-import { useNavigate } from 'react-router-dom'
+import ValidationMessage from '../../components/ValidationMessage/ValidationMessage'
+import useInput from '../../hooks/useInput'
+import { isEmailCheck, isPasswordValid } from '../../utils/isValidationCheck'
 
 const LogIn = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const emailInput = useInput({
+    initialValue: '',
+    validator: isEmailCheck,
+    type: 'email'
+  })
+  const passwordInput = useInput({
+    initialValue: '',
+    validator: isPasswordValid,
+    type: 'password'
+  })
 
   const navigate = useNavigate()
-
-  const handleChangeEmail = (e: ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value)
-  }
-
-  const handleChangePassword = (e: ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
-  }
 
   const auth = getAuth()
 
@@ -26,8 +29,8 @@ const LogIn = () => {
     try {
       const userCredential = await signInWithEmailAndPassword(
         auth,
-        email,
-        password
+        emailInput.value,
+        passwordInput.value
       )
       const user = userCredential.user
       const accessToken = await user.getIdToken()
@@ -44,13 +47,25 @@ const LogIn = () => {
         <AuthInput
           type="email"
           placeholder="이메일"
-          onChange={handleChangeEmail}
+          onChange={emailInput.handleChange}
+          onBlur={emailInput.handleBlur}
         />
+        {emailInput.value === '' && emailInput.isEmpty && (
+          <ValidationMessage text="아이디(이메일)을 입력하세요" />
+        )}
+        {emailInput.isValid && !emailInput.isEmpty && (
+          <ValidationMessage text="아이디(이메일)는 이메일 형식으로 입력해주세요." />
+        )}
         <AuthInput
           type="password"
           placeholder="비밀번호"
-          onChange={handleChangePassword}
+          onChange={passwordInput.handleChange}
+          onBlur={passwordInput.handleBlur}
         />
+        {((passwordInput.isEmpty && passwordInput.isTouched) ||
+          passwordInput.isValid) && (
+          <ValidationMessage text="비밀번호를 형식에 맞게 입력해주세요." />
+        )}
         <AuthButton text="로그인" />
         <hr className="mt-4" />
         <AuthButton

@@ -1,31 +1,30 @@
-export const isPhoneCheck = (phone: string) => {
-  if (phone.startsWith('010') && phone.length === 11) {
+export const isPhoneCheck = (val1: string) => {
+  if (val1.startsWith('010') && val1.length === 11) {
     return true
   }
   return false
 }
 
-export const isEmailCheck = (email: string) => {
-  if (/^.+@.+\..+$/.test(email)) {
+export const isEmailCheck = (val1: string) => {
+  if (/^.+@.+\..+$/.test(val1)) {
     return true
   }
   return false
 }
 
-export const isNameCheck = (name: string) => {
+export const isNameCheck = (val1: string) => {
   const regex = /^[가-힣a-zA-Z]+$/
-  if (name.length > 0 && regex.test(name)) {
+  if (val1.length > 1 && regex.test(val1)) {
     return true
   }
   return false
 }
 
-export const isPasswordCheckValid = (
-  password: string,
-  passwordCheck: string
-) => {
-  if (password === passwordCheck) {
-    return true
+export const isPasswordCheckValid = (val1: string, val2?: string) => {
+  if (val2) {
+    if (val1 === val2) {
+      return true
+    }
   }
   return false
 }
@@ -54,16 +53,16 @@ const isSequentialOrSame = (password: string) => {
   return false
 }
 
-export const isPasswordValid = (password: string, email: string) => {
-  if (password.length < 8 || password.length > 20) {
+export const isPasswordValid = (val1: string, val2?: string) => {
+  if (val1.length < 8 || val1.length > 20) {
     return false
   }
 
   // 기본 조건 확인
-  const hasUpperCase = /[A-Z]/.test(password)
-  const hasLowerCase = /[a-z]/.test(password)
-  const hasDigit = /\d/.test(password)
-  const hasSpecialChar = /[!@#$%^&*()\-_=+[\]{};:'",<.>/?\\|]/.test(password)
+  const hasUpperCase = /[A-Z]/.test(val1)
+  const hasLowerCase = /[a-z]/.test(val1)
+  const hasDigit = /\d/.test(val1)
+  const hasSpecialChar = /[!@#$%^&*()\-_=+[\]{};:'",<.>/?\\|]/.test(val1)
 
   // 영문, 숫자, 특수문자 중 2가지 이상 조합 확인
   const conditionsMet =
@@ -71,10 +70,10 @@ export const isPasswordValid = (password: string, email: string) => {
       .length >= 2
 
   // 연속되거나 동일한 문자/숫자 확인
-  const sequentialOrSame = isSequentialOrSame(password)
+  const sequentialOrSame = isSequentialOrSame(val1)
 
   // 이메일 포함 여부 확인
-  const containsEmail = password.includes(email)
+  const containsEmail = val2 && val1.includes(val2)
 
   // 모든 조건을 만족하는지 확인
   return conditionsMet && !sequentialOrSame && !containsEmail
