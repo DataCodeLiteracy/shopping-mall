@@ -1,3 +1,35 @@
+export const isPhoneCheck = (phone: string) => {
+  if (phone.startsWith('010') && phone.length === 11) {
+    return true
+  }
+  return false
+}
+
+export const isEmailCheck = (email: string) => {
+  if (/^.+@.+\..+$/.test(email)) {
+    return true
+  }
+  return false
+}
+
+export const isNameCheck = (name: string) => {
+  const regex = /^[가-힣a-zA-Z]+$/
+  if (name.length > 0 && regex.test(name)) {
+    return true
+  }
+  return false
+}
+
+export const isPasswordCheckValid = (
+  password: string,
+  passwordCheck: string
+) => {
+  if (password === passwordCheck) {
+    return true
+  }
+  return false
+}
+
 const isSequentialOrSame = (password: string) => {
   for (let i = 0; i < password.length - 2; i++) {
     let current = password.charCodeAt(i)
@@ -22,7 +54,7 @@ const isSequentialOrSame = (password: string) => {
   return false
 }
 
-const isPasswordValid = (password: string, email: string) => {
+export const isPasswordValid = (password: string, email: string) => {
   if (password.length < 8 || password.length > 20) {
     return false
   }
@@ -47,5 +79,3 @@ const isPasswordValid = (password: string, email: string) => {
   // 모든 조건을 만족하는지 확인
   return conditionsMet && !sequentialOrSame && !containsEmail
 }
-
-export default isPasswordValid

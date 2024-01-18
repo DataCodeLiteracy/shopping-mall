@@ -9,11 +9,11 @@ import AuthButton from '../../components/AuthButton/AuthButton'
 import AuthInput from '../../components/AuthInput/AuthInput'
 import ValidationMessage from '../../components/ValidationMessage/ValidationMessage'
 import ValidationMessages from '../../components/ValidationMessage/ValidationMessages'
-import isEmailCheck from '../../utils/isEmailCheck'
-import isNameCheck from '../../utils/isNameCheck'
-import isPasswordCheckValid from '../../utils/isPasswordCheckValid'
-import isPasswordValid from '../../utils/isPasswordValid'
-import isPhoneCheck from '../../utils/isPhoneCheck'
+import { isEmailCheck } from '../../utils/isValidationCheck'
+import { isNameCheck } from '../../utils/isValidationCheck'
+import { isPasswordCheckValid } from '../../utils/isValidationCheck'
+import { isPasswordValid } from '../../utils/isValidationCheck'
+import { isPhoneCheck } from '../../utils/isValidationCheck'
 
 const Register = () => {
   const [email, setEmail] = useState('')
