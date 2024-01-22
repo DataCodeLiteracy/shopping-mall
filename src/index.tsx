@@ -10,7 +10,10 @@ import LogIn from './pages/LogIn'
 import Register from './pages/Register'
 import { RecoilRoot } from 'recoil'
 import { initializeFirebase } from './firebase'
+import { QueryClient, QueryClientProvider } from 'react-query'
 initializeFirebase()
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -47,8 +50,10 @@ if (!rootElement) throw new Error('Root element not found')
 const root: ReactDOM.Root = ReactDOM.createRoot(rootElement)
 root.render(
   <React.StrictMode>
-    <RecoilRoot>
-      <RouterProvider router={router} />
-    </RecoilRoot>
+    <QueryClientProvider client={queryClient}>
+      <RecoilRoot>
+        <RouterProvider router={router} />
+      </RecoilRoot>
+    </QueryClientProvider>
   </React.StrictMode>
 )

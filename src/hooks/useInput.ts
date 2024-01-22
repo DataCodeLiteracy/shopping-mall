@@ -46,9 +46,6 @@ const useInput = ({
 
     if (type === 'passwordCheck') {
       if (!isValid) setIsTouched(false)
-      else {
-        setIsTouched(true)
-      }
     }
   }
 

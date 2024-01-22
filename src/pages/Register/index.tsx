@@ -163,7 +163,7 @@ const Register = () => {
         {!passwordCheckInput.isEmpty && passwordCheckInput.isValid && (
           <ValidationMessage text="X 새 비밀번호가 일치하지 않습니다." />
         )}
-        {passwordCheckInput.isEmpty && passwordCheckInput.isTouched && (
+        {passwordCheckInput.isEmpty && !passwordCheckInput.isTouched && (
           <ValidationMessage text="X 확인을 위해 새 비밀번호를 다시 입력해주세요." />
         )}
         <AuthInput
