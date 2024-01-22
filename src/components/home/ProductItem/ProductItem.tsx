@@ -1,5 +1,7 @@
+import { useNavigate } from 'react-router-dom'
+
 export interface ProductItemProps {
-  productId: number
+  productId: string | undefined
   name: string
   price: number
   imageURL: string
@@ -10,8 +12,14 @@ interface ProductProps {
 }
 
 const ProductItem = ({ item }: ProductProps) => {
+  const navigate = useNavigate()
+
+  const moveToTheProductPage = () => {
+    navigate(`/product/${item.productId}`)
+  }
+
   return (
-    <li>
+    <li onClick={moveToTheProductPage}>
       <div>
         <img src={item.imageURL} alt="" />
       </div>
