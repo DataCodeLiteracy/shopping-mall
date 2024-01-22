@@ -1,0 +1,74 @@
+[
+  {
+    "productId": "1",
+    "name": "후드티",
+    "price": 30000,
+    "imageURL": "/images/1.webp"
+  },
+  {
+    "productId": "2",
+    "name": "후드티",
+    "price": 32000,
+    "imageURL": "/images/2.webp"
+  },
+  {
+    "productId": "3",
+    "name": "원피스",
+    "price": 45000,
+    "imageURL": "/images/3.webp"
+  },
+  {
+    "productId": "4",
+    "name": "원피스",
+    "price": 48000,
+    "imageURL": "/images/6.webp"
+  },
+  {
+    "productId": "5",
+    "name": "바지",
+    "price": 25000,
+    "imageURL": "/images/4.webp"
+  },
+  {
+    "productId": "6",
+    "name": "티셔츠",
+    "price": 15000,
+    "imageURL": "/images/5.webp"
+  },
+  {
+    "productId": "7",
+    "name": "자켓",
+    "price": 60000,
+    "imageURL": "/images/7.webp"
+  },
+  {
+    "productId": "8",
+    "name": "후드티",
+    "price": 30000,
+    "imageURL": "/images/1.webp"
+  },
+  {
+    "productId": "9",
+    "name": "후드티",
+    "price": 32000,
+    "imageURL": "/images/2.webp"
+  },
+  {
+    "productId": "10",
+    "name": "원피스",
+    "price": 45000,
+    "imageURL": "/images/3.webp"
+  },
+  {
+    "productId": "11",
+    "name": "원피스",
+    "price": 48000,
+    "imageURL": "/images/6.webp"
+  },
+  {
+    "productId": "12",
+    "name": "바지",
+    "price": 25000,
+    "imageURL": "/images/4.webp"
+  }
+]

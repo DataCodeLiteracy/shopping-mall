@@ -48,7 +48,7 @@ const Nav = () => {
   }
 
   return (
-    <nav className="flex justify-between p-15 h-50 border-solid border-b border-gray-700">
+    <nav className="flex justify-between p-15 h-50 border-solid border-b border-gray-200">
       <div
         className="flex items-center cursor-pointer"
         onClick={() => navigate('/')}
