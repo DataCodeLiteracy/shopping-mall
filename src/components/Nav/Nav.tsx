@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { CiShop } from 'react-icons/ci'
 import { FaCartArrowDown, FaPencilAlt, FaUser } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
-import { onUserStateChanged } from '../../firebase'
+import { logOutUser, onUserStateChanged } from '../../firebase'
 import { User } from 'firebase/auth'
 
 export interface UserInfo {
@@ -14,14 +14,13 @@ export interface UserInfo {
 const Nav = () => {
   const [userInfo, setUserInfo] = useState<User | null>(null)
   const navigate = useNavigate()
-  const accessToken = localStorage.getItem('access_token')
 
   useEffect(() => {
     onUserStateChanged(setUserInfo)
   }, [])
 
   const handleLogOut = () => {
-    localStorage.removeItem('access_token')
+    logOutUser()
     navigate('/login')
   }
 
@@ -36,17 +35,17 @@ const Nav = () => {
       </div>
       <div
         className={`flex items-center justify-evenly ${
-          accessToken ? 'w-1/3' : 'w-1/5'
+          userInfo ? 'w-1/3' : 'w-1/5'
         }`}
       >
-        {accessToken && (
+        {userInfo && (
           <FaCartArrowDown
             className="text-20 cursor-pointer"
             onClick={() => navigate('/cart')}
           />
         )}
-        {accessToken && <FaPencilAlt className="text-20 cursor-pointer" />}
-        {accessToken && (
+        {userInfo && <FaPencilAlt className="text-20 cursor-pointer" />}
+        {userInfo && (
           <div className="flex items-center">
             <div className="flex items-center justify-center w-30 h-30 mr-6 border-1 border-solid border-black rounded-full">
               {userInfo && userInfo.photoURL ? (
@@ -60,9 +59,9 @@ const Nav = () => {
         )}
         <button
           className="p-6 bg-red-400 text-15 text-white"
-          onClick={accessToken ? handleLogOut : () => navigate('/login')}
+          onClick={userInfo ? handleLogOut : () => navigate('/login')}
         >
-          {accessToken ? '로그아웃' : '로그인'}
+          {userInfo ? '로그아웃' : '로그인'}
         </button>
       </div>
     </nav>

@@ -28,11 +28,7 @@ const LogIn = () => {
 
     try {
       if (!emailInput.isValid && !passwordInput.isValid) {
-        const accessToken = await loginUser(
-          emailInput.value,
-          passwordInput.value
-        )
-        localStorage.setItem('access_token', accessToken)
+        await loginUser(emailInput.value, passwordInput.value)
 
         navigate('/')
       } else {

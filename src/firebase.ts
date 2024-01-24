@@ -4,6 +4,7 @@ import {
   getAuth,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
   updateProfile
 } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
@@ -64,4 +65,9 @@ export const onUserStateChanged = (
   onAuthStateChanged(auth, (user) => {
     callback(user)
   })
+}
+
+export const logOutUser = async () => {
+  const auth = getAuth()
+  await signOut(auth)
 }
