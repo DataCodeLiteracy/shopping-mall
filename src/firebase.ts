@@ -8,6 +8,7 @@ import {
   updateProfile
 } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
+import { getDatabase, ref, child, get } from 'firebase/database'
 import { getAnalytics } from 'firebase/analytics'
 
 const firebaseConfig = {
@@ -22,13 +23,14 @@ const firebaseConfig = {
   measurementId: 'G-WHYDTJERHT'
 }
 
-export const initializeFirebase = () => {
-  console.log('Initializing Firebase')
-  const app = initializeApp(firebaseConfig)
-  const analytics = getAnalytics(app)
-  const auth = getAuth(app)
-  return app
+export interface ExtendedUser extends User {
+  isAdmin: boolean
 }
+
+const app = initializeApp(firebaseConfig)
+const analytics = getAnalytics(app)
+const auth = getAuth(app)
+const database = getDatabase(app)
 
 export const createUserEmailAndPassword = async (
   email: string,
@@ -58,12 +60,13 @@ export const loginUser = async (email: string, password: string) => {
 }
 
 export const onUserStateChanged = (
-  callback: React.Dispatch<React.SetStateAction<User | null>>
+  callback: React.Dispatch<React.SetStateAction<ExtendedUser | null>>
 ) => {
   const auth = getAuth()
 
-  onAuthStateChanged(auth, (user) => {
-    callback(user)
+  onAuthStateChanged(auth, async (user) => {
+    const updatedUser = user ? await adminUser(user) : null
+    callback(updatedUser as ExtendedUser)
   })
 }
 
@@ -71,3 +74,17 @@ export const logOutUser = async () => {
   const auth = getAuth()
   await signOut(auth)
 }
+
+export const adminUser = async (user: User | null) => {
+  return get(ref(database, 'admins')) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const admins = snapshot.val()
+        const isAdmin = admins.includes(user?.uid)
+        return { ...user, isAdmin }
+      }
+      return user
+    })
+}
+
+export default app

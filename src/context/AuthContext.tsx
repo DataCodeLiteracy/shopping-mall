@@ -1,15 +1,14 @@
-import { User } from 'firebase/auth'
 import { createContext, useEffect, useState } from 'react'
-import { onUserStateChanged } from '../firebase'
+import { ExtendedUser, onUserStateChanged } from '../firebase'
 
 interface ContextProps {
   children: React.ReactNode
 }
 
-const AuthContext = createContext<User | null>(null)
+export const AuthContext = createContext<ExtendedUser | null>(null)
 
 export const UserContext = ({ children }: ContextProps) => {
-  const [userInfo, setUserInfo] = useState<User | null>(null)
+  const [userInfo, setUserInfo] = useState<ExtendedUser | null>(null)
 
   useEffect(() => {
     onUserStateChanged(setUserInfo)

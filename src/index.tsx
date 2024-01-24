@@ -9,9 +9,8 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import LogIn from './pages/LogIn'
 import Register from './pages/Register'
 import { RecoilRoot } from 'recoil'
-import { initializeFirebase } from './firebase'
 import { QueryClient, QueryClientProvider } from 'react-query'
-initializeFirebase()
+import app from './firebase'
 
 const queryClient = new QueryClient()
 

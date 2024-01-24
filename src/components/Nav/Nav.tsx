@@ -1,23 +1,15 @@
-import { useEffect, useState } from 'react'
+import { useContext } from 'react'
 import { CiShop } from 'react-icons/ci'
 import { FaCartArrowDown, FaPencilAlt, FaUser } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
-import { logOutUser, onUserStateChanged } from '../../firebase'
-import { User } from 'firebase/auth'
-
-export interface UserInfo {
-  uid: string
-  displayName: string | null
-  photoURL: string | null
-}
+import { AuthContext } from '../../context/AuthContext'
+import { logOutUser } from '../../firebase'
 
 const Nav = () => {
-  const [userInfo, setUserInfo] = useState<User | null>(null)
+  const userInfo = useContext(AuthContext)
   const navigate = useNavigate()
 
-  useEffect(() => {
-    onUserStateChanged(setUserInfo)
-  }, [])
+  console.log(userInfo)
 
   const handleLogOut = () => {
     logOutUser()
