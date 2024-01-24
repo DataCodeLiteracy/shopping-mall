@@ -1,14 +1,20 @@
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useGetData from '../../hooks/useGetData'
 
 const Product = () => {
   const { id } = useParams()
   const { data } = useGetData()
 
+  const navigate = useNavigate()
+
   const filteredData = Object.assign(
     {},
     data.filter((item) => item.productId === id)
   )
+
+  const moveToTheCartPage = () => {
+    navigate('/cart')
+  }
 
   return (
     <section className="flex mt-30">
@@ -37,7 +43,12 @@ const Product = () => {
           </div>
         </div>
         <div className="flex justify-center items-center">
-          <button className="w-4/5 h-30 bg-red-300 rounded-md">장바구니에 추가</button>
+          <button
+            className="w-4/5 h-30 bg-red-300 rounded-md"
+            onClick={moveToTheCartPage}
+          >
+            장바구니에 추가
+          </button>
         </div>
       </div>
     </section>
