@@ -1,50 +1,28 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { useEffect, useState } from 'react'
 import { CiShop } from 'react-icons/ci'
 import { FaCartArrowDown, FaPencilAlt, FaUser } from 'react-icons/fa'
-import { useQuery } from 'react-query'
 import { useNavigate } from 'react-router-dom'
+import { onUserStateChanged } from '../../firebase'
+import { User } from 'firebase/auth'
 
-interface UserInfo {
+export interface UserInfo {
   uid: string
   displayName: string | null
   photoURL: string | null
 }
 
 const Nav = () => {
+  const [userInfo, setUserInfo] = useState<User | null>(null)
   const navigate = useNavigate()
   const accessToken = localStorage.getItem('access_token')
 
-  const fetchAuthUser = (): Promise<UserInfo | null> => {
-    return new Promise((resolve, reject) => {
-      const auth = getAuth()
-      const unsubscribe = onAuthStateChanged(
-        auth,
-        (user) => {
-          unsubscribe()
-          if (user) {
-            const { uid, displayName, photoURL } = user
-            resolve({ uid, displayName, photoURL })
-          } else {
-            resolve(null)
-          }
-        },
-        reject
-      )
-    })
-  }
-
-  const { data: userInfo, isLoading } = useQuery<UserInfo | null>(
-    'authUser',
-    fetchAuthUser
-  )
+  useEffect(() => {
+    onUserStateChanged(setUserInfo)
+  }, [])
 
   const handleLogOut = () => {
     localStorage.removeItem('access_token')
     navigate('/login')
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div>
   }
 
   return (

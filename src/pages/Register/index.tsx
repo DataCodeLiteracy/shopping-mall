@@ -1,8 +1,3 @@
-import {
-  createUserWithEmailAndPassword,
-  getAuth,
-  updateProfile
-} from 'firebase/auth'
 import { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthButton from '../../components/AuthButton/AuthButton'
@@ -11,6 +6,7 @@ import AuthInput, {
 } from '../../components/AuthInput/AuthInput'
 import ValidationMessage from '../../components/ValidationMessage/ValidationMessage'
 import ValidationMessages from '../../components/ValidationMessage/ValidationMessages'
+import { createUserEmailAndPassword } from '../../firebase'
 import useInput from '../../hooks/useInput'
 import {
   isEmailCheck,
@@ -51,9 +47,7 @@ const Register = () => {
     type: 'phone'
   })
 
-  const auth = getAuth()
-
-  const handleSubmitRegister = async (e: FormEvent) => {
+  const handleSubmitRegister = (e: FormEvent) => {
     e.preventDefault()
     try {
       if (
@@ -66,17 +60,11 @@ const Register = () => {
         nameInput.value.length !== 0 &&
         phoneInput.value.length !== 0
       ) {
-        await createUserWithEmailAndPassword(
-          auth,
+        createUserEmailAndPassword(
           emailInput.value,
-          passwordInput.value
+          passwordInput.value,
+          nameInput.value
         )
-        if (auth.currentUser) {
-          await updateProfile(auth.currentUser, {
-            displayName: nameInput.value,
-            photoURL: '/images/user.png'
-          })
-        }
         navigate('/login')
       } else {
         alert('모든 정보를 올바르게 입력해주세요.')
