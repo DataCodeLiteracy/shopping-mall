@@ -1,15 +1,12 @@
-import { useContext } from 'react'
 import { CiShop } from 'react-icons/ci'
 import { FaCartArrowDown, FaPencilAlt, FaUser } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
-import { AuthContext } from '../../context/AuthContext'
+import { useAuthContext } from '../../context/AuthContext'
 import { logOutUser } from '../../firebase'
 
 const Nav = () => {
-  const userInfo = useContext(AuthContext)
+  const { userInfo } = useAuthContext() || {}
   const navigate = useNavigate()
-
-  console.log(userInfo)
 
   const handleLogOut = () => {
     logOutUser()
@@ -36,7 +33,12 @@ const Nav = () => {
             onClick={() => navigate('/cart')}
           />
         )}
-        {userInfo && <FaPencilAlt className="text-20 cursor-pointer" />}
+        {userInfo?.isAdmin && (
+          <FaPencilAlt
+            className="text-20 cursor-pointer"
+            onClick={() => navigate('/product/new')}
+          />
+        )}
         {userInfo && (
           <div className="flex items-center">
             <div className="flex items-center justify-center w-30 h-30 mr-6 border-1 border-solid border-black rounded-full">

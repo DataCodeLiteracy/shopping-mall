@@ -1,16 +1,17 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
-import App from './App'
-import Home from './pages/Home'
-import Product from './pages/Product'
-import Cart from './pages/Cart'
-import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import LogIn from './pages/LogIn'
-import Register from './pages/Register'
-import { RecoilRoot } from 'recoil'
 import { QueryClient, QueryClientProvider } from 'react-query'
-import app from './firebase'
+import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import { RecoilRoot } from 'recoil'
+import App from './App'
+import ProtectedRoute from './components/ProtectedRoute/ProtectedRoute'
+import './index.css'
+import Cart from './pages/Cart'
+import Home from './pages/Home'
+import LogIn from './pages/LogIn'
+import NewProduct from './pages/NewProduct'
+import Product from './pages/Product'
+import Register from './pages/Register'
 
 const queryClient = new QueryClient()
 
@@ -28,6 +29,14 @@ const router = createBrowserRouter([
         element: <Product />
       },
       {
+        path: 'product/new',
+        element: (
+          <ProtectedRoute requireAdmin>
+            <NewProduct />
+          </ProtectedRoute>
+        )
+      },
+      {
         path: 'login',
         element: <LogIn />
       },
@@ -37,7 +46,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'cart',
-        element: <Cart />
+        element: (
+          <ProtectedRoute>
+            <Cart />
+          </ProtectedRoute>
+        )
       }
     ]
   }

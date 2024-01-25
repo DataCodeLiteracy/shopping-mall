@@ -59,12 +59,12 @@ export const loginUser = async (email: string, password: string) => {
   return accessToken
 }
 
-export const onUserStateChanged = (
+export const onUserStateChanged = async (
   callback: React.Dispatch<React.SetStateAction<ExtendedUser | null>>
 ) => {
   const auth = getAuth()
 
-  onAuthStateChanged(auth, async (user) => {
+  await onAuthStateChanged(auth, async (user) => {
     const updatedUser = user ? await adminUser(user) : null
     callback(updatedUser as ExtendedUser)
   })
