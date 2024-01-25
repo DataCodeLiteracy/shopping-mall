@@ -1,3 +1,4 @@
+import { v4 as uuid } from 'uuid'
 import {
   User,
   createUserWithEmailAndPassword,
@@ -8,8 +9,9 @@ import {
   updateProfile
 } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, child, get } from 'firebase/database'
+import { getDatabase, ref, set, get } from 'firebase/database'
 import { getAnalytics } from 'firebase/analytics'
+import { ProductInfo } from './pages/NewProduct'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCq29cvWJpdXBOGH7WX30OQlVQPPv8Q1j8',
@@ -85,6 +87,17 @@ export const adminUser = async (user: User | null) => {
       }
       return user
     })
+}
+
+export const addNewProduct = async (product: ProductInfo, image: string) => {
+  const id = uuid()
+  return set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    price: parseInt(product.price),
+    image,
+    options: product.options.split(',')
+  })
 }
 
 export default app

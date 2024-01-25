@@ -3739,6 +3739,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/uuid@npm:^9.0.7":
+  version: 9.0.7
+  resolution: "@types/uuid@npm:9.0.7"
+  checksum: c7321194aeba9ea173efd1e721403bdf4e7ae6945f8f8cdbc87c791f4b505ccf3dbc4a8883d90b394ef13b7c2dc778045792b05dbb23b3c746f8ea347804d448
+  languageName: node
+  linkType: hard
+
 "@types/ws@npm:^8.5.5":
   version: 8.5.10
   resolution: "@types/ws@npm:8.5.10"
@@ -12626,6 +12633,7 @@ __metadata:
     "@types/firebase": "npm:^3.2.1"
     "@types/react": "npm:^18.2.47"
     "@types/react-dom": "npm:^18.2.18"
+    "@types/uuid": "npm:^9.0.7"
     axios: "npm:^1.6.5"
     eslint-config-react-app: "npm:^7.0.1"
     firebase: "npm:^10.7.1"
@@ -12638,6 +12646,7 @@ __metadata:
     recoil: "npm:^0.7.7"
     tailwindcss: "npm:^3.4.1"
     typescript: "npm:^5.3.3"
+    uuid: "npm:^9.0.1"
     web-vitals: "npm:^2.1.0"
   languageName: unknown
   linkType: soft
@@ -13848,6 +13857,15 @@ __metadata:
   bin:
     uuid: dist/bin/uuid
   checksum: 9a5f7aa1d6f56dd1e8d5f2478f855f25c645e64e26e347a98e98d95781d5ed20062d6cca2eecb58ba7c84bc3910be95c0451ef4161906abaab44f9cb68ffbdd1
+  languageName: node
+  linkType: hard
+
+"uuid@npm:^9.0.1":
+  version: 9.0.1
+  resolution: "uuid@npm:9.0.1"
+  bin:
+    uuid: dist/bin/uuid
+  checksum: 9d0b6adb72b736e36f2b1b53da0d559125ba3e39d913b6072f6f033e0c87835b414f0836b45bcfaf2bdf698f92297fea1c3cc19b0b258bc182c9c43cc0fab9f2
   languageName: node
   linkType: hard
 

@@ -34,6 +34,7 @@ const RAW_RUNTIME_STATE =
           ["@types/firebase", "npm:3.2.1"],\
           ["@types/react", "npm:18.2.48"],\
           ["@types/react-dom", "npm:18.2.18"],\
+          ["@types/uuid", "npm:9.0.7"],\
           ["axios", "npm:1.6.5"],\
           ["eslint-config-react-app", "virtual:56e2f830d7b2e0ed21a5b97c3f05cd0367f2ed1006e685a21e839e324bc395ace017167b32015c18f71a0aac4dd85772e359562d5eabf0663b57804a7b675079#npm:7.0.1"],\
           ["firebase", "npm:10.7.2"],\
@@ -46,6 +47,7 @@ const RAW_RUNTIME_STATE =
           ["recoil", "virtual:56e2f830d7b2e0ed21a5b97c3f05cd0367f2ed1006e685a21e839e324bc395ace017167b32015c18f71a0aac4dd85772e359562d5eabf0663b57804a7b675079#npm:0.7.7"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
+          ["uuid", "npm:9.0.1"],\
           ["web-vitals", "npm:2.1.4"]\
         ],\
         "linkType": "SOFT"\
@@ -6236,6 +6238,15 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/@types-trusted-types-npm-2.0.7-a07fc44f59-8e4202766a.zip/node_modules/@types/trusted-types/",\
         "packageDependencies": [\
           ["@types/trusted-types", "npm:2.0.7"]\
+        ],\
+        "linkType": "HARD"\
+      }]\
+    ]],\
+    ["@types/uuid", [\
+      ["npm:9.0.7", {\
+        "packageLocation": "./.yarn/cache/@types-uuid-npm-9.0.7-c380bb8654-c7321194ae.zip/node_modules/@types/uuid/",\
+        "packageDependencies": [\
+          ["@types/uuid", "npm:9.0.7"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -17550,6 +17561,7 @@ const RAW_RUNTIME_STATE =
           ["@types/firebase", "npm:3.2.1"],\
           ["@types/react", "npm:18.2.48"],\
           ["@types/react-dom", "npm:18.2.18"],\
+          ["@types/uuid", "npm:9.0.7"],\
           ["axios", "npm:1.6.5"],\
           ["eslint-config-react-app", "virtual:56e2f830d7b2e0ed21a5b97c3f05cd0367f2ed1006e685a21e839e324bc395ace017167b32015c18f71a0aac4dd85772e359562d5eabf0663b57804a7b675079#npm:7.0.1"],\
           ["firebase", "npm:10.7.2"],\
@@ -17562,6 +17574,7 @@ const RAW_RUNTIME_STATE =
           ["recoil", "virtual:56e2f830d7b2e0ed21a5b97c3f05cd0367f2ed1006e685a21e839e324bc395ace017167b32015c18f71a0aac4dd85772e359562d5eabf0663b57804a7b675079#npm:0.7.7"],\
           ["tailwindcss", "npm:3.4.1"],\
           ["typescript", "patch:typescript@npm%3A5.3.3#optional!builtin<compat/typescript>::version=5.3.3&hash=e012d7"],\
+          ["uuid", "npm:9.0.1"],\
           ["web-vitals", "npm:2.1.4"]\
         ],\
         "linkType": "SOFT"\
@@ -18973,6 +18986,13 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./.yarn/cache/uuid-npm-8.3.2-eca0baba53-9a5f7aa1d6.zip/node_modules/uuid/",\
         "packageDependencies": [\
           ["uuid", "npm:8.3.2"]\
+        ],\
+        "linkType": "HARD"\
+      }],\
+      ["npm:9.0.1", {\
+        "packageLocation": "./.yarn/cache/uuid-npm-9.0.1-39a8442bc6-9d0b6adb72.zip/node_modules/uuid/",\
+        "packageDependencies": [\
+          ["uuid", "npm:9.0.1"]\
         ],\
         "linkType": "HARD"\
       }]\
