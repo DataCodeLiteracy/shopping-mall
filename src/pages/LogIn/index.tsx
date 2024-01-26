@@ -1,4 +1,3 @@
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 import { FormEvent } from 'react'
 import { useNavigate } from 'react-router-dom'
 import AuthButton from '../../components/AuthButton/AuthButton'
@@ -6,6 +5,7 @@ import AuthInput, {
   DEFAULT_INPUT_STYLE
 } from '../../components/AuthInput/AuthInput'
 import ValidationMessage from '../../components/ValidationMessage/ValidationMessage'
+import { loginUser } from '../../firebase'
 import useInput from '../../hooks/useInput'
 import { isEmailCheck, isPasswordValid } from '../../utils/isValidationCheck'
 
@@ -23,22 +23,12 @@ const LogIn = () => {
 
   const navigate = useNavigate()
 
-  const auth = getAuth()
-
   const handleLogin = async (e: FormEvent) => {
     e.preventDefault()
 
     try {
       if (!emailInput.isValid && !passwordInput.isValid) {
-        const userCredential = await signInWithEmailAndPassword(
-          auth,
-          emailInput.value,
-          passwordInput.value
-        )
-        const user = userCredential.user
-        const accessToken = await user.getIdToken()
-
-        localStorage.setItem('access_token', accessToken)
+        await loginUser(emailInput.value, passwordInput.value)
 
         navigate('/')
       } else {
