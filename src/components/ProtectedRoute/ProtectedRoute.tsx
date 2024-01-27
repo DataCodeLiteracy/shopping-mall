@@ -13,8 +13,6 @@ const ProtectedRoute = ({ children, requireAdmin }: ProtectedRouteProps) => {
     return <div>로딩 중...</div>
   }
 
-  console.log(userInfo)
-
   if (!userInfo || (requireAdmin && !userInfo.isAdmin)) {
     return <Navigate to="/" replace />
   }
