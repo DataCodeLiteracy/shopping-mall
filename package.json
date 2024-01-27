@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@firebase/app": "^0.9.26",
+    "@firebase/database": "^1.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
@@ -15,6 +17,7 @@
     "react-router-dom": "^6.21.2",
     "react-scripts": "5.0.1",
     "recoil": "^0.7.7",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.0"
   },
   "scripts": {
@@ -42,8 +45,10 @@
     ]
   },
   "devDependencies": {
+    "@types/firebase": "^3.2.1",
     "@types/react": "^18.2.47",
     "@types/react-dom": "^18.2.18",
+    "@types/uuid": "^9.0.7",
     "eslint-config-react-app": "^7.0.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.3.3"

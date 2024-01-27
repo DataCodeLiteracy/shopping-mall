@@ -126,3 +126,7 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
+
+input {
+  @apply h-40 px-10 py-10 mb-4 outline-none border-1 border-gray-300;
+}

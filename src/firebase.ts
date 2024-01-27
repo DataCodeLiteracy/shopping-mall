@@ -1,6 +1,18 @@
-import { getAuth } from 'firebase/auth'
+import { v4 as uuid } from 'uuid'
+import {
+  User,
+  createUserWithEmailAndPassword,
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+  updateProfile
+} from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
+import { getDatabase, ref, set, get, child } from 'firebase/database'
 import { getAnalytics } from 'firebase/analytics'
+import { ProductInfo } from './pages/NewProduct'
+import { ProductType } from './components/home/ProductList/ProductList'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCq29cvWJpdXBOGH7WX30OQlVQPPv8Q1j8',
@@ -14,10 +26,96 @@ const firebaseConfig = {
   measurementId: 'G-WHYDTJERHT'
 }
 
-export const initializeFirebase = () => {
-  console.log('Initializing Firebase')
-  const app = initializeApp(firebaseConfig)
-  const analytics = getAnalytics(app)
-  const auth = getAuth(app)
-  return app
+export interface ExtendedUser extends User {
+  isAdmin: boolean
 }
+
+const app = initializeApp(firebaseConfig)
+const analytics = getAnalytics(app)
+const auth = getAuth(app)
+const database = getDatabase(app)
+
+export const createUserEmailAndPassword = async (
+  email: string,
+  password: string,
+  name: string
+) => {
+  const auth = getAuth()
+
+  await createUserWithEmailAndPassword(auth, email, password)
+  if (auth.currentUser) {
+    await updateProfile(auth.currentUser, {
+      displayName: name,
+      photoURL: '/images/user.png'
+    })
+  }
+}
+
+export const loginUser = async (email: string, password: string) => {
+  const auth = getAuth()
+
+  const userCredential = await signInWithEmailAndPassword(auth, email, password)
+
+  const user = userCredential.user
+  const accessToken = await user.getIdToken()
+
+  return accessToken
+}
+
+export const onUserStateChanged = async (
+  callback: React.Dispatch<React.SetStateAction<ExtendedUser | null>>
+) => {
+  const auth = getAuth()
+
+  await onAuthStateChanged(auth, async (user) => {
+    const updatedUser = user ? await adminUser(user) : null
+    callback(updatedUser as ExtendedUser)
+  })
+}
+
+export const logOutUser = async () => {
+  const auth = getAuth()
+  await signOut(auth)
+}
+
+export const adminUser = async (user: User | null) => {
+  return get(ref(database, 'admins')) //
+    .then((snapshot) => {
+      if (snapshot.exists()) {
+        const admins = snapshot.val()
+        const isAdmin = admins.includes(user?.uid)
+        return { ...user, isAdmin }
+      }
+      return user
+    })
+}
+
+export const addNewProduct = async (product: ProductInfo, image: string) => {
+  const id = uuid()
+  return set(ref(database, `products/${id}`), {
+    ...product,
+    id,
+    price: parseInt(product.price),
+    image,
+    options: product.options.split(',')
+  })
+}
+
+export const getAllProducts = async (): Promise<ProductType[]> => {
+  const dbRef = ref(getDatabase())
+  try {
+    const snapshot = await get(child(dbRef, 'products'))
+    if (snapshot.exists()) {
+      const products: ProductType[] = Object.values(snapshot.val())
+      return products
+    } else {
+      console.log('No data available')
+      return []
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  return []
+}
+
+export default app

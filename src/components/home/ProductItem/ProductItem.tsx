@@ -1,31 +1,28 @@
 import { useNavigate } from 'react-router-dom'
-
-export interface ProductItemProps {
-  productId: string | undefined
-  name: string
-  price: number
-  imageURL: string
-}
+import { ProductType } from '../ProductList/ProductList'
 
 interface ProductProps {
-  item: ProductItemProps
+  item: ProductType
 }
 
 const ProductItem = ({ item }: ProductProps) => {
   const navigate = useNavigate()
 
-  const moveToTheProductPage = () => {
-    navigate(`/product/${item.productId}`)
+  const handleClick = () => {
+    navigate(`/product/${item.id}`, { state: { item } })
   }
 
   return (
-    <li onClick={moveToTheProductPage}>
+    <li className="cursor-pointer" onClick={handleClick}>
       <div>
-        <img src={item.imageURL} alt="" />
+        <img src={item.image} alt="" />
       </div>
       <div className="flex justify-between p-4 mt-8">
-        <span>{item.name}</span>
-        <span>{item.price}</span>
+        <span className="truncate">{item.title}</span>
+        <span className="ml-4">{item.price.toLocaleString()}</span>
+      </div>
+      <div className="flex flex-start p-4">
+        <span>{item.category}</span>
       </div>
     </li>
   )
