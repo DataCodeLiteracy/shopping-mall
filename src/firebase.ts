@@ -9,9 +9,10 @@ import {
   updateProfile
 } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
-import { getDatabase, ref, set, get } from 'firebase/database'
+import { getDatabase, ref, set, get, child } from 'firebase/database'
 import { getAnalytics } from 'firebase/analytics'
 import { ProductInfo } from './pages/NewProduct'
+import { ProductType } from './components/home/ProductList/ProductList'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyCq29cvWJpdXBOGH7WX30OQlVQPPv8Q1j8',
@@ -98,6 +99,23 @@ export const addNewProduct = async (product: ProductInfo, image: string) => {
     image,
     options: product.options.split(',')
   })
+}
+
+export const getAllProducts = async (): Promise<ProductType[]> => {
+  const dbRef = ref(getDatabase())
+  try {
+    const snapshot = await get(child(dbRef, 'products'))
+    if (snapshot.exists()) {
+      const products: ProductType[] = Object.values(snapshot.val())
+      return products
+    } else {
+      console.log('No data available')
+      return []
+    }
+  } catch (error) {
+    console.error(error)
+  }
+  return []
 }
 
 export default app
