@@ -8,6 +8,11 @@ import ValidationMessage from '../../components/ValidationMessage/ValidationMess
 import { loginUser } from '../../firebase'
 import useInput from '../../hooks/useInput'
 import { isEmailCheck, isPasswordValid } from '../../utils/isValidationCheck'
+import {
+  STYLE_BORDER_B_BLUE,
+  STYLE_BORDER_B_RED,
+  STYLE_BUTTON_WHITE
+} from '../Register'
 
 const LogIn = () => {
   const emailInput = useInput({
@@ -55,9 +60,9 @@ const LogIn = () => {
           onClick={emailInput.handleTouch}
           className={`${
             emailInput.isTouched && !emailInput.isValid
-              ? 'border-b-2 border-blue-500'
+              ? STYLE_BORDER_B_BLUE
               : emailInput.isValid
-              ? 'border-b-2 border-red-500'
+              ? STYLE_BORDER_B_RED
               : ''
           } ${DEFAULT_INPUT_STYLE}`}
         />
@@ -75,9 +80,9 @@ const LogIn = () => {
           onClick={passwordInput.handleTouch}
           className={`${
             passwordInput.isTouched && !passwordInput.isValid
-              ? 'border-b-2 border-blue-500'
+              ? STYLE_BORDER_B_BLUE
               : passwordInput.isValid
-              ? 'border-b-2 border-red-500'
+              ? STYLE_BORDER_B_RED
               : ''
           } ${DEFAULT_INPUT_STYLE}`}
         />
@@ -89,7 +94,7 @@ const LogIn = () => {
         <hr className="mt-4" />
         <AuthButton
           type="button"
-          className="w-full p-10 mt-4 border border-solid border-gray-400 rounded-sm bg-white"
+          className={STYLE_BUTTON_WHITE}
           text="회원가입"
           onClick={() => navigate('/register')}
         />

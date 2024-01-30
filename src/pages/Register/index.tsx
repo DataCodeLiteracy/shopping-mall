@@ -16,6 +16,11 @@ import {
   isPhoneCheck
 } from '../../utils/isValidationCheck'
 
+export const STYLE_BORDER_B_BLUE = 'border-b-2 border-blue-500'
+export const STYLE_BORDER_B_RED = 'border-b-2 border-red-500'
+export const STYLE_BUTTON_WHITE =
+  'w-full p-10 my-4 border border-solid border-gray-400 rounded-sm bg-white'
+
 const Register = () => {
   const navigate = useNavigate()
 
@@ -93,9 +98,9 @@ const Register = () => {
           onClick={emailInput.handleTouch}
           className={`${
             emailInput.isTouched && !emailInput.isValid
-              ? 'border-b-2 border-blue-500'
+              ? STYLE_BORDER_B_BLUE
               : emailInput.isValid
-              ? 'border-b-2 border-red-500'
+              ? STYLE_BORDER_B_RED
               : ''
           } ${DEFAULT_INPUT_STYLE}`}
         />
@@ -115,9 +120,9 @@ const Register = () => {
           onBlur={passwordInput.handleBlur}
           className={`${
             passwordInput.isTouched && !passwordInput.isValid
-              ? 'border-b-2 border-blue-500'
+              ? STYLE_BORDER_B_BLUE
               : passwordInput.isValid
-              ? 'border-b-2 border-red-500'
+              ? STYLE_BORDER_B_RED
               : ''
           } ${DEFAULT_INPUT_STYLE}`}
         />
@@ -141,10 +146,10 @@ const Register = () => {
             !passwordCheckInput.isEmpty &&
             passwordCheckInput.isTouched &&
             !passwordCheckInput.isValid
-              ? 'border-b-2 border-blue-500'
+              ? STYLE_BORDER_B_BLUE
               : passwordCheckInput.isValid ||
                 (passwordCheckInput.isEmpty && passwordCheckInput.isTouched)
-              ? 'border-b-2 border-red-500'
+              ? STYLE_BORDER_B_RED
               : ''
           } ${DEFAULT_INPUT_STYLE}`}
         />
@@ -164,9 +169,9 @@ const Register = () => {
           onClick={nameInput.handleTouch}
           className={`${
             nameInput.isTouched && !nameInput.isValid
-              ? 'border-b-2 border-blue-500'
+              ? STYLE_BORDER_B_BLUE
               : nameInput.isValid
-              ? 'border-b-2 border-red-500'
+              ? STYLE_BORDER_B_RED
               : ''
           } ${DEFAULT_INPUT_STYLE}`}
         />
@@ -183,9 +188,9 @@ const Register = () => {
           onClick={phoneInput.handleTouch}
           className={`${
             phoneInput.isTouched && !phoneInput.isValid
-              ? 'border-b-2 border-blue-500'
+              ? STYLE_BORDER_B_BLUE
               : phoneInput.isValid
-              ? 'border-b-2 border-red-500'
+              ? STYLE_BORDER_B_RED
               : ''
           } ${DEFAULT_INPUT_STYLE}`}
         />
@@ -196,7 +201,7 @@ const Register = () => {
         <AuthButton
           type="button"
           text="로그인하러 가기"
-          className="w-full p-10 my-4 border border-solid border-gray-400 rounded-sm bg-white"
+          className={STYLE_BUTTON_WHITE}
           onClick={() => navigate('/login')}
         />
         <AuthButton text="동의하고 가입하기" />
